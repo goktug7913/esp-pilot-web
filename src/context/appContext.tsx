@@ -27,10 +27,36 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const [selectedDevice, setSelectedDevice] = useState<string | undefined>(
     devices[0].value,
   );
+  const [armedState, setArmedState] = useState(false);
 
   useEffect(() => {
     axiosClient.defaults.baseURL = `http://${selectedDevice}`;
   }, [selectedDevice]);
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://your-esp32-ip:81"); // Change to your ESP32 IP and port
+
+    socket.onopen = () => {
+      console.log("WebSocket connected");
+    };
+
+    socket.onmessage = (event) => {
+      const message = event.data;
+      if (message === "armed") {
+        setArmedState(true);
+      } else if (message === "disarmed") {
+        setArmedState(false);
+      }
+    };
+
+    socket.onclose = () => {
+      console.log("WebSocket disconnected");
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, []);
 
   return (
     <AppContext.Provider

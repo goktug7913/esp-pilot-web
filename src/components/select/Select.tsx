@@ -1,4 +1,4 @@
-import styles from "./select.module.css";
+import styles from "./Select.module.css";
 import { useState } from "react";
 import { KeyValue } from "@/types/types";
 

@@ -3,17 +3,17 @@
 	color: #fff;
 	padding: 0.5rem 1rem;
 	margin-bottom: 1rem;
-	border-radius: 0.25rem;
+	border-radius: 0 0 0.75rem 0.75rem;
 	display: flex;
 	align-items: center;
 	gap: 1em;
+	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }
 
 .navbar a {
 	color: #fff;
 	text-decoration: none;
 	margin: 0;
-	padding: 0;
 	border: 1px solid white;
 	border-radius: 0.5rem;
 	padding: 0.5rem 1rem;

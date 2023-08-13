@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { useAppContext } from "@/context/appContext";
-import styles from "./navbar.module.css";
-import Select from "@/components/select/select";
+import styles from "./Navbar.module.css";
+import Select from "@/components/select/Select";
 import { useRestartEsp } from "@/api/queries";
 import Link from "next/link";
 

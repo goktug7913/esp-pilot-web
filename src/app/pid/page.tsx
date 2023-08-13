@@ -2,6 +2,7 @@
 import { usePidList } from "@/api/queries";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import PidWidget from "@/components/pidWidget/PidWidget";
 export default function Pid() {
   const { data } = usePidList();
 
@@ -29,6 +30,7 @@ export default function Pid() {
     setYawKi(data.yawKi);
     setYawKd(data.yawKd);
   }, [data]);
+
   return (
     <main>
       <div
@@ -39,87 +41,37 @@ export default function Pid() {
       >
         <div
           style={{
-            border: "1px solid black",
-            borderRadius: "0.5rem",
             display: "flex",
-            padding: "1rem",
-            alignItems: "center",
             gap: "1rem",
           }}
         >
-          <h3>Pitch</h3>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
-                borderBottom: "1px solid black",
-                padding: "0.5rem",
-              }}
-            >
-              <p style={{ padding: 0, margin: 0 }}>P Gain</p>
-              <input
-                type="number"
-                value={pitchkp}
-                onChange={(e) => setPitchKp(e.target.value)}
-                min="0"
-                max="45"
-                datatype={"number"}
-                accept={".0-9"}
-                step={0.001}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
-                borderBottom: "1px solid black",
-                padding: "0.5rem",
-              }}
-            >
-              <p style={{ padding: 0, margin: 0 }}>I Gain</p>
-              <input
-                type="number"
-                value={pitchki}
-                onChange={(e) => setPitchKi(e.target.value)}
-                min="0"
-                max="45"
-                datatype={"number"}
-                accept={".0-9"}
-                step={0.001}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
-                borderBottom: "1px solid black",
-                padding: "0.5rem",
-              }}
-            >
-              <p style={{ padding: 0, margin: 0 }}>D Gain</p>
-              <input
-                type="number"
-                value={pitchkd}
-                onChange={(e) => setPitchKd(e.target.value)}
-                min="0"
-                max="45"
-                datatype={"number"}
-                accept={".0-9"}
-                step={0.001}
-              />
-            </div>
-          </div>
+          <PidWidget
+            title="Pitch"
+            kp={pitchkp}
+            ki={pitchki}
+            kd={pitchkd}
+            setKp={setPitchKp}
+            setKi={setPitchKi}
+            setKd={setPitchKd}
+          />
+          <PidWidget
+            title="Roll"
+            kp={rollkp}
+            ki={rollki}
+            kd={rollkd}
+            setKp={setRollKp}
+            setKi={setRollKi}
+            setKd={setRollKd}
+          />
+          <PidWidget
+            title="Yaw"
+            kp={yawkp}
+            ki={yawki}
+            kd={yawkd}
+            setKp={setYawKp}
+            setKi={setYawKi}
+            setKd={setYawKd}
+          />
         </div>
 
         <div
@@ -143,7 +95,7 @@ export default function Pid() {
             <input
               type="number"
               value={maxAngle}
-              onChange={(e) => setMaxAngle(e.target.value)}
+              onChange={(e) => setMaxAngle(parseFloat(e.target.value))}
               min="0"
               max="45"
               datatype={"number"}
@@ -157,7 +109,7 @@ export default function Pid() {
               value={maxAngle}
               step={0.1}
               datatype={"number"}
-              onChange={(e) => setMaxAngle(e.target.value)}
+              onChange={(e) => setMaxAngle(parseFloat(e.target.value))}
             />
           </div>
           <div
@@ -195,8 +147,7 @@ export default function Pid() {
             border: "none",
             backgroundColor: "blue",
             color: "white",
-            background:
-              "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
+            background: "green",
             fontSize: "1.5rem",
             fontWeight: "bold",
           }}
